@@ -1,3 +1,7 @@
+
+import React, { useState, useEffect } from "react";
+
+
 const OpinionCard = ({ title, author, excerpt }) => (
     <div className="border rounded-lg p-4">
       <h3 className="text-xl font-bold">{title}</h3>
