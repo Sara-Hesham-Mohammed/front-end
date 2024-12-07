@@ -1,32 +1,44 @@
-import { NavLink } from "react-router-dom";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import AuthContext from '../store/authContext'; // Adjust path based on your folder structure
+
+const NavItem = ({ to, children }) => (
+  <li>
+    <NavLink to={to} className="nav-link" activeClassName="active">
+      {children}
+    </NavLink>
+  </li>
+);
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useContext(AuthContext);
+
   return (
-    <nav className="bg-white shadow-md">
-      <ul className="flex justify-between p-4">
-        <li>
-          <NavLink to="/" className="px-4 py-2 hover:underline">
-            Newsfeed
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/events" className="px-4 py-2 hover:underline">
-            Events
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/opinion" className="px-4 py-2 hover:underline">
-            Opinion
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/about" className="px-4 py-2 hover:underline">
-            About Us
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+    <header className="navbar">
+      <nav>
+        <ul className="nav-list">
+          <NavItem to="/">Home</NavItem>
+          <NavItem to="/categories">Categories</NavItem>
+          <NavItem to="/search">Search</NavItem>
+          {isAuthenticated && <NavItem to="/profile">Profile</NavItem>}
+          {!isAuthenticated && (
+            <>
+              <NavItem to="/signin">Sign In</NavItem>
+              <NavItem to="/signup">Sign Up</NavItem>
+            </>
+          )}
+          {isAuthenticated && (
+            <li>
+              <button onClick={logout} className="nav-link logout-btn">
+                Logout
+              </button>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </header>
   );
 };
 
 export default Navbar;
+  
