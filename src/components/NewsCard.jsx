@@ -1,5 +1,4 @@
 import React from 'react';
-import './NewsCard.css'; // Optional: for styling
 
 const NewsCard = ({ imageUrl,date, title, snippet }) => {
   return (
