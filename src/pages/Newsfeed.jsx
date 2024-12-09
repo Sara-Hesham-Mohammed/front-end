@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../components/NewsCard";
+import Loader from "../components/Loader";
 
 const Newsfeed = () => {
   const [news, setNews] = useState([]);
@@ -14,7 +15,7 @@ const Newsfeed = () => {
       });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader/>;
 
   return (
 
