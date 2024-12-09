@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NewsCard from "../components/NewsCard";
 
 const Newsfeed = () => {
   const [news, setNews] = useState([]);
@@ -16,15 +17,23 @@ const Newsfeed = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {news.map((article) => (
-        <div key={article.id} className="border rounded-lg p-4">
-          <img src={article.image} alt={article.title} className="rounded-md" />
-          <h3 className="text-xl font-bold">{article.title}</h3>
-          <p>{article.excerpt}</p>
-        </div>
-      ))}
-    </div>
+
+    //this but map it to ur component
+    <>
+      //this but map it to ur component
+      <NewsCard 
+      
+      /><div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {news.map((article) => 
+        <NewsCard
+          key={article.id}
+          imageUrl={article.image}
+          date={article.date}
+          title={article.title}
+          snippet={article.excerpt}
+        />)}
+      </div>
+      </>
   );
 };
 

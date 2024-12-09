@@ -17,9 +17,7 @@ const NewsCard = ({ imageUrl,date, title, snippet }) => {
               <h3 className="mt-0.5 text-lg text-white">{title}</h3>
             </a>
 
-            <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-            {snippet}
-            </p>
+            <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">{snippet}</p>
           </div>
         </div>
       </article>
