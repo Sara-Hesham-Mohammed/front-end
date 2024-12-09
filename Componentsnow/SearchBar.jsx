@@ -23,7 +23,7 @@ const SearchBar = ({ onSearch }) => {
         <option value="">Select Category</option>
         <option value="Politics">Politics</option>
         <option value="Sports">Sports</option>
-        <option value="Entertainment">Entertainment</option>
+        <option value="Stocks">Stocks</option>
       </select>
       <select onChange={(e) => setSource(e.target.value)} className="p-2 border">
         <option value="">Select Source</option>
