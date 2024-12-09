@@ -3,6 +3,8 @@ import NewsCard from "../components/NewsCard";
 import Loader from "../components/Loader";
 
 const Newsfeed = () => {
+
+  /*** this section fe moshkela, it doesnt render ay haga, fix tthe API then we'll see***/ 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,12 +18,12 @@ const Newsfeed = () => {
   }, []);
 
   if (loading) return <Loader/>;
+  /******/ 
 
   return (
 
     //this but map it to ur component
     <>
-      //this but map it to ur component
       <NewsCard 
       
       /><div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

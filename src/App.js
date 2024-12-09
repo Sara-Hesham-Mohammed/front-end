@@ -1,3 +1,4 @@
+import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -8,15 +9,7 @@ import About from "./pages/aboutUs";
 
 function App() {
   return (
-  
-      <><Navbar />
-    <Routes>
-      <Route path="/" element={<Newsfeed />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/opinion" element={<Opinion />} />
-      <Route path="/about" element={<About />} />
-    </Routes></>
-    
+    <Newsfeed/>
   );
 }
 
