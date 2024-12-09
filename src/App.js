@@ -9,12 +9,11 @@ import About from "./pages/aboutUs";
 
 function App() {
   return (
-    <><h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1><Router>
+    <>
+    <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Newsfeed />} />
+          <Route path="/news" element={<Newsfeed />} />
           <Route path="/events" element={<Events />} />
           <Route path="/opinion" element={<Opinion />} />
           <Route path="/about" element={<About />} />

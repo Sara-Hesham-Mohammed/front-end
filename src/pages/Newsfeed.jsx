@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../components/NewsCard";
-import Loader from "../components/Loader";
+import Loader from "../UI/Loader";
 import axios from 'axios'; // Ensure axios is installed via npm
+import Tabs from "../components/Tabs";
 
 
 const Newsfeed = () => {
@@ -37,12 +38,14 @@ const Newsfeed = () => {
 
     //this but map it to ur component
     <>
+    <Tabs>
+    </Tabs>
       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {news.map((article, index) => 
         <NewsCard
           key={index}
           imageUrl={article.photo_url}
-          date={article.date}
+          date={article.published_datetime_utc}
           title={article.title}
           snippet={article.snippet}
         />)}
