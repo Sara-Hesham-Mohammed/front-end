@@ -41,7 +41,7 @@ const Newsfeed = () => {
         {news.map((article, index) => 
         <NewsCard
           key={index}
-          imageUrl={article.imageUrl}
+          imageUrl={article.photo_url}
           date={article.date}
           title={article.title}
           snippet={article.snippet}

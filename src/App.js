@@ -9,15 +9,17 @@ import About from "./pages/aboutUs";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Newsfeed />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/opinion" element={<Opinion />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+    <><h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1><Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Newsfeed />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/opinion" element={<Opinion />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router></>
   );
 }
 
