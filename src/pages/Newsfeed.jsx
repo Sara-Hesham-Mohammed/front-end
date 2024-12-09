@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../components/NewsCard";
 import Loader from "../components/Loader";
+import axios from 'axios'; // Ensure axios is installed via npm
+
 
 const Newsfeed = () => {
 
@@ -9,13 +11,24 @@ const Newsfeed = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/news")
-      .then((res) => res.json())
-      .then((data) => {
-        setNews(data);
+    const fetchHeadlines = async () => {
+      try {
+        // Send GET request to your backend server on localhost:4000
+        const response = await axios.get('http://localhost:4000/top-headlines');
+        
+        // Log the response data for debugging
+        console.log('API Response:', response.data);
+
+        // Update the state with fetched headlines
+        setNews(response.data.news);
+        setLoading(false);  // Stop loading once data is fetched
+      } catch (err) {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    fetchHeadlines();  // Call the function to fetch headlines
+  }, []);  // Empty array means this runs once when the component mounts
 
   if (loading) return <Loader/>;
   /******/ 
@@ -24,16 +37,14 @@ const Newsfeed = () => {
 
     //this but map it to ur component
     <>
-      <NewsCard 
-      
-      /><div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {news.map((article) => 
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {news.map((article, index) => 
         <NewsCard
-          key={article.id}
-          imageUrl={article.image}
+          key={index}
+          imageUrl={article.imageUrl}
           date={article.date}
           title={article.title}
-          snippet={article.excerpt}
+          snippet={article.snippet}
         />)}
       </div>
       </>
