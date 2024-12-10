@@ -5,6 +5,10 @@ import axios from "axios";
 import Tabs from "../components/Tabs";
 import RepostForm from "../components/reposts/RepostForm";
 import ArticlePreview from "../components/reposts/ArticlePreview";
+import ErrorPage from "./Error";
+import CategoriesBar from "../components/CategoriesBar";
+import Header from "../UI/Header";
+import SignUpForm from "../UI/SignUpForm";
 
 const Newsfeed = () => {
   const [news, setNews] = useState([]);
@@ -12,15 +16,17 @@ const Newsfeed = () => {
   const [reposts, setReposts] = useState([]);
   const [showRepostForm, setShowRepostForm] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState(null);
-
+  const [hasError, setHasError] = useState(false);
   // Fetching the news headlines
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
         const response = await axios.get("http://localhost:4000/top-headlines");
-        console.log("API Response:", response.data); // Debugging
-        setNews(response.data.news);
+        console.log("API Response:", response.data.news.articles); // Debugging
+
+        setNews(response.data.news.articles); // Access nested articles
       } catch (err) {
+        setHasError(true);
         console.error("Error fetching news:", err);
       } finally {
         setLoading(false); // Stop loader
@@ -77,93 +83,111 @@ const Newsfeed = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-center font-bold text-3xl mb-6 text-gray-800">Newsfeed</h1>
+      <h1 className="text-center font-bold text-3xl mb-6 text-gray-800">
+        Newsfeed
+      </h1>
 
       {/* Repost Form */}
-      {showRepostForm && selectedArticle && (
-        <RepostForm
-          article={selectedArticle}
-          onRepost={handleRepost}
-          onCancel={() => setShowRepostForm(false)}
-        />
-      )}
 
-      {/* Display Original News Articles */}
       <div>
-        <Tabs/>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((article, index) => (
+        {showRepostForm && selectedArticle && (
+          <div
+            className="fixed inset-0 flex justify-center items-center z-50 bg-gray-500 bg-opacity-50"
+            onClick={() => setShowRepostForm(false)} // Close modal when clicking outside
+          >
             <div
-              key={article.id || index}
-              className="border rounded-lg p-4 bg-white shadow-md hover:shadow-lg transition-shadow"
+              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
             >
-              <ArticlePreview article={article}>
-                <button
-                  onClick={() => openRepostForm(article)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md mt-3 w-full hover:bg-blue-600 transition-colors"
-                >
-                  Repost
-                </button>
-              </ArticlePreview>
+              <RepostForm
+                article={selectedArticle}
+                onRepost={handleRepost}
+                onCancel={() => setShowRepostForm(false)}
+              />
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
 
-      {/* Display Reposts */}
-      {reposts.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">Reposts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reposts.map((repost, index) => (
-              <div
-                key={index}
-                className="border rounded-lg p-4 bg-white shadow-md hover:shadow-lg transition-shadow"
-              >
-                <ArticlePreview article={repost.article}>
-                  <p className="italic mt-2 text-gray-600">"{repost.caption}"</p>
-                  <div className="flex gap-3 mt-4">
-                    <button
-                      onClick={() => handleLike(index)}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+      <div>
+        <CategoriesBar />
+        <Tabs
+          topHeadlines={
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {news.map((article, index) => (
+                <NewsCard
+                  key={index}
+                  article={article}
+                  openRepostForm={() => openRepostForm(article)}
+                />
+              ))}
+            </div>
+          }
+          followingList={
+            reposts.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">
+                  Reposts
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {reposts.map((repost, index) => (
+                    <div
+                      key={index}
+                      className="border rounded-lg p-4 bg-white shadow-md hover:shadow-lg transition-shadow"
                     >
-                      Like {repost.likes}
-                    </button>
-                    <button
-                      onClick={() => handleSubmitComment(index)}
-                      className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors"
-                    >
-                      Comment
-                    </button>
-                  </div>
+                      <ArticlePreview article={repost.article}>
+                        <p className="italic mt-2 text-gray-600">
+                          "{repost.caption}"
+                        </p>
+                        <div className="flex gap-3 mt-4">
+                          <button
+                            onClick={() => handleLike(index)}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                          >
+                            Like {repost.likes}
+                          </button>
+                          <button
+                            onClick={() => handleSubmitComment(index)}
+                            className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors"
+                          >
+                            Comment
+                          </button>
+                        </div>
 
-                  {/* Comment Textarea */}
-                  <textarea
-                    value={repost.comment || ""}
-                    onChange={(e) => handleCommentChange(index, e.target.value)}
-                    placeholder="Add a comment..."
-                    className="w-full mt-4 p-2 bg-slate-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  ></textarea>
+                        {/* Comment Textarea */}
+                        <textarea
+                          value={repost.comment || ""}
+                          onChange={(e) =>
+                            handleCommentChange(index, e.target.value)
+                          }
+                          placeholder="Add a comment..."
+                          className="w-full mt-4 p-2 bg-slate-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        ></textarea>
 
-                  {/* Display Comments */}
-                  {repost.comments.length > 0 && (
-                    <div className="mt-4">
-                      <h4 className="text-sm font-semibold text-gray-800">Comments:</h4>
-                      <ul>
-                        {repost.comments.map((comment, idx) => (
-                          <li key={idx} className="text-sm text-gray-600">
-                            {comment}
-                          </li>
-                        ))}
-                      </ul>
+                        {/* Display Comments */}
+                        {repost.comments.length > 0 && (
+                          <div className="mt-4">
+                            <h4 className="text-sm font-semibold text-gray-800">
+                              Comments:
+                            </h4>
+                            <ul>
+                              {repost.comments.map((comment, idx) => (
+                                <li key={idx} className="text-sm text-gray-600">
+                                  {comment}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </ArticlePreview>
                     </div>
-                  )}
-                </ArticlePreview>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+            )
+          }
+        />
+      </div>
     </div>
   );
 };
