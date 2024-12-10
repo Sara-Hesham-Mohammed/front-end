@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignUpForm from "../UI/SignUpForm";
 
-const Tabs = () => {
+const Tabs = (props) => {
   // State to track the selected tab
   const [selectedTab, setSelectedTab] = useState("Top Headlines");
 
@@ -11,12 +11,12 @@ const Tabs = () => {
   // Content to show for each tab
   const renderContent = () => {
     if (selectedTab === "Top Headlines") {
-      return <div>X</div>; // Content for Top Headlines
+      return props.topHeadlines; // Content for Top Headlines
     } else if (selectedTab === "Following") {
       //check if user is logged in, if they aren't show a sign up button if they are,then show then their following list
 
       return isUserLoggedIn ? (
-        <div>Your following list goes here</div> // Replace with actual following list
+         props.followingList// Replace with actual following list
       ) : (
         <SignUpForm /> // Show SignUpForm if user is not logged in
       ); // Content for Following
