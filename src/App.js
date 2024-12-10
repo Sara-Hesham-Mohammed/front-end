@@ -6,7 +6,8 @@ import Newsfeed from "./pages/Newsfeed";
 import Events from "./pages/Events";
 import Opinion from "./pages/Opinion";
 import About from "./pages/aboutUs";
-
+import WeatherComponent from './components/WeatherWidget';
+import Footer from './components/Footer';
 function App() {
   return (
     <>
@@ -18,7 +19,12 @@ function App() {
           <Route path="/opinion" element={<Opinion />} />
           <Route path="/about" element={<About />} />
         </Routes>
-      </Router></>
+      </Router>
+      
+      <WeatherComponent/>
+
+      <Footer/>
+      </>
   );
 }
 

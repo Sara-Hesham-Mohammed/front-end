@@ -5,6 +5,7 @@ import axios from 'axios';
 import Tabs from "../components/Tabs";
 import ErrorPage from "./Error";
 import CategoriesBar from "../components/CategoriesBar";
+import Header from "../UI/Header";
 
 
 const Newsfeed = () => {
@@ -51,14 +52,7 @@ const Newsfeed = () => {
       </Tabs>
 
       <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">
-          <div className="text-center">
-              <h1 className="text-3xl text-gray-800 font-semibold">
-                  Blog
-              </h1>
-              <p className="mt-3 text-gray-500">
-                  Blogs that are loved by the community. Updated every hour.
-              </p>
-          </div>
+          <Header/>
 
           <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {news.map((article, index) => 

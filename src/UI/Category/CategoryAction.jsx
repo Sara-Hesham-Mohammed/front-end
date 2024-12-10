@@ -50,11 +50,6 @@ const CategoryAction = () => {
       href: "#education",
       isSelected: selectedCategory === "Education",
     },
-    {
-      label: "Crime and Law",
-      href: "#crime-and-law",
-      isSelected: selectedCategory === "Crime and Law",
-    },
   ];
 
   const handleTabClick = (label) => {
@@ -62,9 +57,8 @@ const CategoryAction = () => {
   };
 
   return (
-   
     <Category
-    options={tabOptions.map((option) => ({
+      options={tabOptions.map((option) => ({
         ...option,
         onClick: () => handleTabClick(option.label),
       }))}
