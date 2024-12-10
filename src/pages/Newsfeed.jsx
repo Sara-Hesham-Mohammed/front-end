@@ -90,7 +90,7 @@ const Newsfeed = () => {
 
       {/* Display Original News Articles */}
       <div>
-        <Tabs>{/* Add any tabs if needed */}</Tabs>
+        <Tabs/>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {news.map((article, index) => (
             <div
