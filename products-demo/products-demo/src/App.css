@@ -36,31 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.navbar {
-  background-color: #333;
-  padding: 1rem;
-}
-
-.nav-list {
-  display: flex;
-  list-style: none;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-}
-
-.nav-link.active, .nav-link:hover {
-  text-decoration: underline;
-}
-
-.logout-btn {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
