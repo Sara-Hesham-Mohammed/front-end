@@ -1,80 +1,52 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'; // Ensure this is correctly imported
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Menu items matching the routes
-  const menuItems = [
-    { name: 'Newsfeed', link: '/' },
-    { name: 'Events', link: '/events' },
-    { name: 'Opinion', link: '/opinion' },
-    { name: 'About', link: '/about' },
-  ];
-
   return (
-    <nav className="sticky top-0 z-50 w-full px-4 bg-black text-blue-gray-900 border rounded-none shadow-md bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center mr-4 font-sans text-base font-medium leading-relaxed text-inherit antialiased">
-          <h1 className="text-lg font-bold">YourApp</h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden lg:block">
-            <ul className="flex gap-6">
-              {menuItems.map((item, index) => (
-                <li key={index} className="font-sans text-sm font-normal leading-normal text-blue-gray-900">
-                  <NavLink
-                    to={item.link}
-                    className={({ isActive }) => 
-                      `nav-link ${isActive ? 'text-blue-500 font-semibold' : ''}`}
-                  >
-                    {item.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button
-            className="relative h-6 w-6 text-center text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-            onClick={toggleMenu}
-            type="button"
+    <div className="bg-blue-500">
+      <nav className="relative px-4 py-4 flex justify-between items-center bg-white">
+        <a
+          href="#"
+          className="flex items-center justify-center text-3xl font-bold leading-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            width="40"
+            height="40"
+            className="mr-4" // Adds space between the icon and text
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
+            <path d="M96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L80 480c-44.2 0-80-35.8-80-80L0 128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 272c0 8.8 7.2 16 16 16s16-7.2 16-16L96 96zm64 24l0 80c0 13.3 10.7 24 24 24l112 0c13.3 0 24-10.7 24-24l0-80c0-13.3-10.7-24-24-24L184 96c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16z" />
+          </svg>
+          <h3 className="font-bold text-3xl text-gray-800">
+            The Insight Stream
+          </h3>
+        </a>
 
-      <div className={`absolute top-0 left-0 w-full bg-black shadow-lg transition-transform transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} origin-top`}>
-        <div className="flex justify-between p-4 border-b">
-          <h2 className="text-lg font-semibold text-blue-gray-900">Menu</h2>
-          <button onClick={toggleMenu} className="text-gray-600 hover:text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        <ul className="p-4">
-          {menuItems.map((item, index) => (
-            <li key={index} className="py-2 text-blue-gray-900">
-              <NavLink
-                to={item.link}
-                onClick={toggleMenu}
-                className={({ isActive }) => 
-                  `block ${isActive ? 'text-blue-500 font-semibold' : ''}`}
-              >
-                {item.name}
-              </NavLink>
-            </li>
-          ))}
+        <ul className="flex space-x-6">
+          <li>
+            <NavLink to="/" className="px-4 py-2 hover:underline">
+              Newsfeed
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/events" className="px-4 py-2 hover:underline">
+              Events
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/opinion" className="px-4 py-2 hover:underline">
+              Opinion
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about" className="px-4 py-2 hover:underline">
+              About Us
+            </NavLink>
+          </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
