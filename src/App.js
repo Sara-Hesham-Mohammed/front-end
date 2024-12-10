@@ -9,15 +9,16 @@ import About from "./pages/aboutUs";
 
 function App() {
   return (
+    <>
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Newsfeed />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/opinion" element={<Opinion />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Newsfeed />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/opinion" element={<Opinion />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router></>
   );
 }
 
