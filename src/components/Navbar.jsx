@@ -17,7 +17,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full px-4 bg-white text-blue-gray-900 border rounded-none shadow-md bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8">
+    <nav className="sticky top-0 z-50 w-full px-4 bg-black text-blue-gray-900 border rounded-none shadow-md bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center mr-4 font-sans text-base font-medium leading-relaxed text-inherit antialiased">
           <h1 className="text-lg font-bold">YourApp</h1>
@@ -50,7 +50,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className={`absolute top-0 left-0 w-full bg-white shadow-lg transition-transform transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} origin-top`}>
+      <div className={`absolute top-0 left-0 w-full bg-black shadow-lg transition-transform transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} origin-top`}>
         <div className="flex justify-between p-4 border-b">
           <h2 className="text-lg font-semibold text-blue-gray-900">Menu</h2>
           <button onClick={toggleMenu} className="text-gray-600 hover:text-gray-900">
