@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-md">
       <ul className="flex justify-between p-4">
         <li>
-          <NavLink to="/news" className="px-4 py-2 hover:underline">
+          <NavLink to="/" className="px-4 py-2 hover:underline">
             Newsfeed
           </NavLink>
         </li>
