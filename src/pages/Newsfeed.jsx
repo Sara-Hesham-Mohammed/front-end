@@ -8,7 +8,6 @@ import ArticlePreview from "../components/reposts/ArticlePreview";
 import ErrorPage from "./Error";
 import CategoriesBar from "../components/CategoriesBar";
 import Header from "../UI/Header";
-import SignUpForm from "../UI/SignUpForm";
 
 const Newsfeed = () => {
   const [news, setNews] = useState([]);

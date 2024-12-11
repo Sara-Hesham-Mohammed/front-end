@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SignUpLoginBtns from "../UI/Buttons/SignUp-LoginBtns";
+import SignUpLoginBtnActions from "../UI/Buttons/SignUpLoginBtns";
+import SignUpLoginBtns from "../UI/Buttons/SignUpLoginBtns";
 
 const Navbar = () => {
   return (

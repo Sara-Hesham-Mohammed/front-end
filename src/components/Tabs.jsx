@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpForm from "../UI/SignUpForm";
+import DummySignUpForm from "../UI/DummySignUpForm";
 
 const Tabs = (props) => {
   // State to track the selected tab
@@ -18,7 +18,7 @@ const Tabs = (props) => {
       return isUserLoggedIn ? (
          props.followingList// Replace with actual following list
       ) : (
-        <SignUpForm /> // Show SignUpForm if user is not logged in
+        <DummySignUpForm/>// Show SignUpForm if user is not logged in
       ); // Content for Following
     }
   };
