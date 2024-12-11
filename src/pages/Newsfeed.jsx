@@ -20,7 +20,7 @@ const Newsfeed = () => {
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/top-headlines");
+        const response = await axios.get("http://4.251.122.109/top-headlines");
         console.log("API Response:", response.data.news.articles); // Debugging
 
         setNews(response.data.news.articles); // Access nested articles
