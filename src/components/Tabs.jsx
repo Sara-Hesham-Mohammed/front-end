@@ -16,69 +16,72 @@ const Tabs = (props) => {
       //check if user is logged in, if they aren't show a sign up button if they are,then show then their following list
 
       return isUserLoggedIn ? (
-         props.followingList// Replace with actual following list
+        props.followingList // Replace with actual following list
       ) : (
-        <DummySignUpForm/>// Show SignUpForm if user is not logged in
+        <DummySignUpForm /> // Show SignUpForm if user is not logged in
       ); // Content for Following
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 rounded-xl p-2 overflow-hidden">
-      <div className="sm:hidden">
-        <label htmlFor="Tab" className="sr-only">
-          Tab
-        </label>
-        <select
-          id="Tab"
-          className="w-full rounded-md border-gray-200"
-          value={selectedTab}
-          onChange={(e) => setSelectedTab(e.target.value)}
-        >
-          <option>Top Headlines</option>
-          <option>Following</option>
-        </select>
-      </div>
-
-      <div className="hidden sm:block">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex gap-6" aria-label="Tabs">
-            <a
-              href="#"
-              className={`shrink-0 border-b-2 ${
-                selectedTab === "Top Headlines"
-                  ? "border-gray-500 text-gray-700"
-                  : "border-transparent text-gray-500"
-              } px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700`}
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedTab("Top Headlines");
-              }}
-            >
-              Top Headlines
-            </a>
-
-            <a
-              href="#"
-              className={`shrink-0 border-b-2 ${
-                selectedTab === "Following"
-                  ? "border-gray-500 text-gray-700"
-                  : "border-transparent text-gray-500"
-              } px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700`}
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedTab("Following");
-              }}
-            >
-              Following
-            </a>
-          </nav>
+    <>
+      
+      <div className="flex flex-col items-center gap-8 rounded-xl p-2 overflow-hidden">
+        <div className="sm:hidden">
+          <label htmlFor="Tab" className="sr-only">
+            Tab
+          </label>
+          <select
+            id="Tab"
+            className="w-full rounded-md border-gray-200"
+            value={selectedTab}
+            onChange={(e) => setSelectedTab(e.target.value)}
+          >
+            <option>Top Headlines</option>
+            <option>Following</option>
+          </select>
         </div>
-      </div>
 
-      {/* Conditional rendering based on selected tab */}
-      <div className="mt-4">{renderContent()}</div>
-    </div>
+        <div className="hidden sm:block">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex gap-6" aria-label="Tabs">
+              <a
+                href="#"
+                className={`shrink-0 border-b-2 ${
+                  selectedTab === "Top Headlines"
+                    ? "border-gray-500 text-gray-700"
+                    : "border-transparent text-gray-500"
+                } px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedTab("Top Headlines");
+                }}
+              >
+                Top Headlines
+              </a>
+
+              <a
+                href="#"
+                className={`shrink-0 border-b-2 ${
+                  selectedTab === "Following"
+                    ? "border-gray-500 text-gray-700"
+                    : "border-transparent text-gray-500"
+                } px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedTab("Following");
+                }}
+              >
+                Following
+              </a>
+            </nav>
+          </div>
+        </div>
+
+        {/* Conditional rendering based on selected tab */}
+        <div className="mt-4">{renderContent()}</div>
+      </div>
+    </>
   );
 };
 
